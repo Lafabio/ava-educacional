@@ -25,8 +25,16 @@ SUPABASE_URL = os.environ.get('SUPABASE_URL')
 SUPABASE_KEY = os.environ.get('SUPABASE_KEY')
 
 app = FastAPI(title='AVA - Ambiente Virtual de Aprendizagem', version='1.0.0')
-templates = Jinja2Templates(directory=os.path.join(BASE_DIR, 'templates'))
-app.mount('/static', StaticFiles(directory=os.path.join(BASE_DIR, 'static')), name='static')
+
+templates_dir = os.path.join(BASE_DIR, 'templates')
+if os.path.isdir(templates_dir):
+    templates = Jinja2Templates(directory=templates_dir)
+else:
+    templates = Jinja2Templates(directory='templates')
+
+static_dir = os.path.join(BASE_DIR, 'static')
+if os.path.isdir(static_dir):
+    app.mount('/static', StaticFiles(directory=static_dir), name='static')
 
 supabase = None
 if SUPABASE_URL and SUPABASE_KEY and 'supabase.co' in SUPABASE_URL:
