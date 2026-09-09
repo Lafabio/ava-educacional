@@ -283,9 +283,14 @@ async def auth_signup(email: str = Form(...), password: str = Form(...), full_na
         raise HTTPException(500, 'Supabase não configurado')
     try:
         user = supabase.auth.sign_up({'email': email, 'password': password})
-        supabase.table('profiles').insert({'id': user.user.id, 'email': email, 'full_name': full_name}).execute()
+        try:
+            supabase.table('profiles').insert({'id': user.user.id, 'email': email, 'full_name': full_name}).execute()
+        except Exception:
+            pass
         return {'success': True, 'user': user.user}
     except Exception as e:
+        if 'already registered' in str(e).lower() or 'User already registered' in str(e):
+            return RedirectResponse(url='/login?msg=email_ja_cadastrado', status_code=302)
         raise HTTPException(400, str(e))
 
 @app.post('/api/auth/login')
