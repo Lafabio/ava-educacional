@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>{% block title %}AVA Educacional{% endblock %}</title>
+    <script src='https://unpkg.com/htmx.org@1.9.10'></script>
+    <link href='https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css' rel='stylesheet'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'>
+</head>
+<body>
+    <nav class='bg-blue-600 text-white p-4'>
+        <div class='container mx-auto flex justify-between'>
+            <a href='/' class='font-bold text-xl'>AVA Educacional</a>
+            <div>
+                <a href='/dashboard' class='mr-4'>Dashboard</a>
+                <a href='/login' class='mr-4'>Login</a>
+                <a href='/register'>Registrar</a>
+            </div>
+        </div>
+    </nav>
+    <main class='container mx-auto p-4'>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
