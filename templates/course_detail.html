@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}{{ course.title }}{% endblock %}
+{% block content %}
+<div class='max-w-4xl mx-auto'>
+    <a href='/courses' class='text-blue-600 mb-4 inline-block'>&larr; Voltar para Cursos</a>
+    <div class='bg-white p-6 rounded-lg shadow-lg mb-6'>
+        <h1 class='text-3xl font-bold mb-2'>{{ course.title }}</h1>
+        <p class='text-gray-600 mb-4'>{{ course.description or 'Sem descrição' }}</p>
+        <div class='flex gap-4 text-sm text-gray-500'>
+            <span>Professor: {{ course.profiles.full_name if course.profiles else 'N/A' }}</span>
+            <span>Criado em: {{ course.created_at.strftime('%d/%m/%Y') if course.created_at else 'N/A' }}</span>
+        </div>
+    </div>
+
+    <div class='bg-white p-6 rounded-lg shadow-lg'>
+        <h2 class='text-xl font-bold mb-4'>Conteúdos</h2>
+        {% if contents %}
+            <ul>
+            {% for content in contents %}
+                <li class='border-b py-3 flex justify-between items-center'>
+                    <div>
+                        <span class='font-semibold'>{{ content.title }}</span>
+                        <span class='ml-2 text-sm text-gray-500'>({{ content.type }})</span>
+                    </div>
+                    {% if content.content_url %}
+                        <a href='{{ content.content_url }}' target='_blank' class='text-blue-600 text-sm'>Abrir</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p class='text-gray-500'>Nenhum conteúdo adicionado ainda.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
