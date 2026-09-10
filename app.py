@@ -267,8 +267,22 @@ def login_page(request: Request):
 def register_page(request: Request):
     return templates.TemplateResponse(request, 'register.html')
 
+@app.get('/forgot-password')
+def forgot_password_page(request: Request):
+    return templates.TemplateResponse(request, 'forgot_password.html')
+
 @app.get('/dashboard')
-def dashboard(request: Request):
+async def dashboard(request: Request):
+    access_token = request.cookies.get('access_token')
+    if not access_token:
+        return RedirectResponse(url='/login', status_code=302)
+    if supabase:
+        try:
+            user = supabase.auth.get_user(access_token)
+            if not user or not user.user:
+                return RedirectResponse(url='/login', status_code=302)
+        except Exception:
+            return RedirectResponse(url='/login', status_code=302)
     user_email = request.cookies.get('user_email', 'Usuário')
     return templates.TemplateResponse(request, 'dashboard.html', {'user_email': user_email})
 
@@ -306,6 +320,20 @@ async def auth_login(request: Request, email: str = Form(...), password: str = F
         return response
     except Exception as e:
         return RedirectResponse(url='/login?error=1', status_code=302)
+
+@app.post('/api/auth/forgot-password')
+async def auth_forgot_password(request: Request, email: str = Form(...)):
+    if not supabase:
+        raise HTTPException(500, 'Supabase não configurado')
+    try:
+        # Obtém a URL base do request para redirecionamento correto
+        base_url = str(request.base_url).rstrip('/')
+        redirect_to = f'{base_url}/login?msg=senha_redefinida'
+
+        supabase.auth.reset_password_for_email(email, {'redirect_to': redirect_to})
+        return RedirectResponse(url='/login?msg=email_enviado', status_code=302)
+    except Exception as e:
+        return RedirectResponse(url='/forgot-password?error=1', status_code=302)
 
 # --- Cursos ---
 
