@@ -17,19 +17,38 @@
         </div>
     </div>
 
-    <div class='bg-white p-6 rounded-lg shadow-lg'>
-        <h2 class='text-xl font-bold mb-4'>Conteúdos</h2>
+    <div class='bg-white p-6 rounded-lg shadow-lg mb-6'>
+        <div class='flex justify-between items-center mb-4'>
+            <h2 class='text-xl font-bold'>Conteúdos</h2>
+            <button onclick="document.getElementById('modal-conteudo').classList.remove('hidden')" class='bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700'><i class='fas fa-plus mr-1'></i> Adicionar</button>
+        </div>
         {% if contents %}
             <ul>
             {% for content in contents %}
                 <li class='border-b py-3 flex justify-between items-center'>
-                    <div>
-                        <span class='font-semibold'>{{ content.title }}</span>
-                        <span class='ml-2 text-sm text-gray-500'>({{ content.type }})</span>
+                    <div class='flex items-center gap-3'>
+                        {% if content.type == 'pdf' %}
+                            <i class='fas fa-file-pdf text-red-500 text-xl'></i>
+                        {% elif content.type == 'video' %}
+                            <i class='fas fa-video text-purple-500 text-xl'></i>
+                        {% elif content.type == 'quiz' %}
+                            <i class='fas fa-question-circle text-yellow-500 text-xl'></i>
+                        {% elif content.type == 'assignment' %}
+                            <i class='fas fa-clipboard-list text-blue-500 text-xl'></i>
+                        {% else %}
+                            <i class='fas fa-file text-gray-500 text-xl'></i>
+                        {% endif %}
+                        <div>
+                            <span class='font-semibold'>{{ content.title }}</span>
+                            <span class='ml-2 text-sm text-gray-500'>({{ content.type }})</span>
+                        </div>
                     </div>
-                    {% if content.content_url %}
-                        <a href='{{ content.content_url }}' target='_blank' class='text-blue-600 text-sm'>Abrir</a>
-                    {% endif %}
+                    <div class='flex gap-2'>
+                        {% if content.content_url %}
+                            <a href='{{ content.content_url }}' target='_blank' class='text-blue-600 text-sm px-3 py-1 bg-blue-100 rounded hover:bg-blue-200'><i class='fas fa-external-link-alt mr-1'></i>Abrir</a>
+                        {% endif %}
+                        <button onclick="excluirConteudo('{{ content.id }}')" class='text-red-600 text-sm px-3 py-1 bg-red-100 rounded hover:bg-red-200'><i class='fas fa-trash'></i></button>
+                    </div>
                 </li>
             {% endfor %}
             </ul>
@@ -38,11 +57,49 @@
         {% endif %}
     </div>
 </div>
+
+<div id='modal-conteudo' class='hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
+    <div class='bg-white p-6 rounded-lg shadow-lg w-96'>
+        <h3 class='text-xl font-bold mb-4'>Adicionar Conteúdo</h3>
+        <form method='POST' action='/api/contents/upload' enctype='multipart/form-data'>
+            <input type='hidden' name='course_id' value='{{ course.id }}'>
+            <div class='mb-4'>
+                <label class='block text-gray-700'>Título</label>
+                <input type='text' name='title' class='w-full p-2 border rounded' required>
+            </div>
+            <div class='mb-4'>
+                <label class='block text-gray-700'>Tipo</label>
+                <select name='content_type' class='w-full p-2 border rounded' required>
+                    <option value='pdf'>PDF</option>
+                    <option value='video'>Vídeo</option>
+                    <option value='quiz'>Quiz</option>
+                    <option value='assignment'>Trabalho</option>
+                </select>
+            </div>
+            <div class='mb-4'>
+                <label class='block text-gray-700'>Arquivo</label>
+                <input type='file' name='file' class='w-full p-2 border rounded' required>
+            </div>
+            <div class='flex justify-end gap-2'>
+                <button type='button' onclick="document.getElementById('modal-conteudo').classList.add('hidden')" class='px-4 py-2 border rounded'>Cancelar</button>
+                <button type='submit' class='px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700'>Enviar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script>
 function excluirCurso() {
     if(confirm('Deseja excluir este curso?')) {
         fetch('/api/courses/{{ course.id }}', { method: 'DELETE' }).then(() => {
             window.location.href = '/courses';
+        });
+    }
+}
+function excluirConteudo(id) {
+    if(confirm('Deseja excluir este conteúdo?')) {
+        fetch('/api/contents/' + id, { method: 'DELETE' }).then(() => {
+            window.location.reload();
         });
     }
 }

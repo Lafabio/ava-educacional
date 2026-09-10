@@ -570,7 +570,14 @@ async def upload_content(
         'content_url': url
     }).execute()
     
-    return {'content': data.data[0]}
+    return RedirectResponse(url=f'/course/{course_id}', status_code=302)
+
+@app.delete('/api/contents/{content_id}')
+def delete_content(content_id: str):
+    if not supabase:
+        raise HTTPException(500, 'Supabase não configurado')
+    supabase.table('contents').delete().eq('id', content_id).execute()
+    return {'success': True}
 
 # ============================================================================
 # ROTAS (HTML com templates)
