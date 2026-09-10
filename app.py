@@ -579,6 +579,32 @@ def delete_content(content_id: str):
     supabase.table('contents').delete().eq('id', content_id).execute()
     return {'success': True}
 
+@app.post('/api/contents/update')
+async def update_content(
+    content_id: str = Form(...),
+    course_id: str = Form(...),
+    title: str = Form(...),
+    content_type: str = Form(...),
+    file: UploadFile = File(None)
+):
+    if not supabase:
+        raise HTTPException(500, 'Supabase não configurado')
+    
+    update_data = {'title': title, 'type': content_type}
+    
+    if file and file.filename:
+        content = await file.read()
+        file_name = f"{uuid.uuid4()}_{file.filename}"
+        try:
+            supabase.storage.from_('contents').upload(file_name, content)
+            url = supabase.storage.from_('contents').get_public_url(file_name)
+            update_data['content_url'] = url
+        except Exception as e:
+            raise HTTPException(500, f'Erro no upload: {str(e)}')
+    
+    supabase.table('contents').update(update_data).eq('id', content_id).execute()
+    return RedirectResponse(url=f'/course/{course_id}', status_code=302)
+
 # ============================================================================
 # ROTAS (HTML com templates)
 # ============================================================================
