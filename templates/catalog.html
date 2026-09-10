@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}Catálogo de Cursos{% endblock %}
+{% block content %}
+<div class='max-w-6xl mx-auto'>
+    <h1 class='text-3xl font-bold mb-6'>Catálogo de Cursos</h1>
+    <p class='text-gray-600 mb-6'>Escolha um curso para se matricular</p>
+
+    <div id='courses-container' class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+        <p class='text-gray-500'>Carregando cursos...</p>
+    </div>
+    <div id='empty-state' class='hidden text-center py-10'>
+        <i class='fas fa-book-open text-6xl text-gray-300 mb-4'></i>
+        <p class='text-gray-500 text-lg'>Nenhum curso disponível no momento</p>
+    </div>
+</div>
+
+<script>
+fetch('/api/courses').then(r=>r.json()).then(d => {
+    const container = document.getElementById('courses-container');
+    const empty = document.getElementById('empty-state');
+    if(d.courses.length === 0) {
+        container.classList.add('hidden');
+        empty.classList.remove('hidden');
+    } else {
+        empty.classList.add('hidden');
+        container.classList.remove('hidden');
+        container.innerHTML = d.courses.map(c => `
+            <div class='bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition'>
+                <div class='flex items-center gap-2 mb-3'>
+                    <i class='fas fa-book text-blue-600 text-xl'></i>
+                    <span class='text-sm text-gray-500'>${c.profiles ? c.profiles.full_name : 'Professor'}</span>
+                </div>
+                <h3 class='font-bold text-xl mb-2'>${c.title || 'Sem título'}</h3>
+                <p class='text-gray-600 text-sm mb-4'>${c.description || 'Sem descrição'}</p>
+                <div class='flex items-center justify-between text-sm text-gray-500 mb-4'>
+                    <span><i class='fas fa-calendar mr-1'></i>${new Date(c.created_at).toLocaleDateString('pt-BR')}</span>
+                </div>
+                <button onclick="matricular('${c.id}', '${c.title}')" class='w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition'>
+                    <i class='fas fa-plus-circle mr-1'></i> Matricular-se
+                </button>
+            </div>
+        `).join('');
+    }
+});
+
+function matricular(courseId, courseName) {
+    if(confirm('Deseja se matricular no curso "' + courseName + '"?')) {
+        const formData = new FormData();
+        formData.append('course_id', courseId);
+        fetch('/api/enrollments', { method: 'POST', body: formData })
+        .then(r => r.json())
+        .then(d => {
+            if(d.enrollment) {
+                alert('Matrícula realizada com sucesso!');
+            }
+        })
+        .catch(e => {
+            alert('Erro ao matricular. Tente novamente.');
+        });
+    }
+}
+</script>
+{% endblock %}

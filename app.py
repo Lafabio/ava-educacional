@@ -275,6 +275,14 @@ def forgot_password_page(request: Request):
 def courses_page(request: Request):
     return templates.TemplateResponse(request, 'courses.html')
 
+@app.get('/catalog')
+def catalog_page(request: Request):
+    return templates.TemplateResponse(request, 'catalog.html')
+
+@app.get('/my-courses')
+def my_enrollments_page(request: Request):
+    return templates.TemplateResponse(request, 'my_enrollments.html')
+
 @app.get('/dashboard')
 async def dashboard(request: Request):
     access_token = request.cookies.get('access_token')
@@ -397,11 +405,37 @@ def delete_course(course_id: str):
 # --- Matrículas ---
 
 @app.post('/api/enrollments')
-async def enroll_student(course_id: str = Form(...), student_id: str = Form(...)):
+async def enroll_student(request: Request, course_id: str = Form(...)):
     if not supabase:
         raise HTTPException(500, 'Supabase não configurado')
+    access_token = request.cookies.get('access_token')
+    if not access_token:
+        raise HTTPException(401, 'Não autenticado')
+    try:
+        user = supabase.auth.get_user(access_token)
+        student_id = user.user.id
+    except Exception:
+        raise HTTPException(401, 'Token inválido')
+    existing = supabase.table('enrollments').select('*').eq('student_id', student_id).eq('course_id', course_id).execute()
+    if existing.data:
+        return {'enrollment': existing.data[0], 'message': 'Já matriculado'}
     data = supabase.table('enrollments').insert({'course_id': course_id, 'student_id': student_id}).execute()
     return {'enrollment': data.data[0]}
+
+@app.get('/api/my-enrollments')
+def my_enrollments(request: Request):
+    if not supabase:
+        return {'enrollments': []}
+    access_token = request.cookies.get('access_token')
+    if not access_token:
+        return {'enrollments': []}
+    try:
+        user = supabase.auth.get_user(access_token)
+        student_id = user.user.id
+    except Exception:
+        return {'enrollments': []}
+    data = supabase.table('enrollments').select('*, courses(*)').eq('student_id', student_id).execute()
+    return {'enrollments': data.data}
 
 # --- Avaliações ---
 
