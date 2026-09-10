@@ -37,9 +37,13 @@ if os.path.isdir(static_dir):
     app.mount('/static', StaticFiles(directory=static_dir), name='static')
 
 supabase = None
+SUPABASE_SERVICE_KEY = os.environ.get('SUPABASE_SERVICE_KEY')
 if SUPABASE_URL and SUPABASE_KEY and 'supabase.co' in SUPABASE_URL:
     try:
-        supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+        if SUPABASE_SERVICE_KEY:
+            supabase = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
+        else:
+            supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
     except Exception:
         supabase = None
 
