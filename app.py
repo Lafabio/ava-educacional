@@ -271,6 +271,10 @@ def register_page(request: Request):
 def forgot_password_page(request: Request):
     return templates.TemplateResponse(request, 'forgot_password.html')
 
+@app.get('/courses')
+def courses_page(request: Request):
+    return templates.TemplateResponse(request, 'courses.html')
+
 @app.get('/dashboard')
 async def dashboard(request: Request):
     access_token = request.cookies.get('access_token')
