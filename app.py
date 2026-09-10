@@ -349,11 +349,23 @@ def list_courses():
     return {'courses': data.data}
 
 @app.post('/api/courses')
-async def create_course(request: CreateCourseRequest):
+async def create_course(request: Request, title: str = Form(...), description: str = Form('')):
     if not supabase:
         raise HTTPException(500, 'Supabase não configurado')
-    data = supabase.table('courses').insert(request.dict()).execute()
-    return {'course': data.data[0]}
+    access_token = request.cookies.get('access_token')
+    if not access_token:
+        raise HTTPException(401, 'Não autenticado')
+    try:
+        user = supabase.auth.get_user(access_token)
+        teacher_id = user.user.id
+    except Exception:
+        raise HTTPException(401, 'Token inválido')
+    data = supabase.table('courses').insert({
+        'title': title,
+        'description': description,
+        'teacher_id': teacher_id
+    }).execute()
+    return RedirectResponse(url='/courses', status_code=302)
 
 @app.get('/api/courses/{course_id}')
 def get_course(course_id: str):

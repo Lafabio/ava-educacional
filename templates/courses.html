@@ -73,17 +73,21 @@ function loadCourses() {
 
 document.getElementById('form-novo-curso').onsubmit = function(e) {
     e.preventDefault();
-    const data = {
-        title: document.getElementById('curso-titulo').value,
-        description: document.getElementById('curso-descricao').value
-    };
+    const formData = new FormData();
+    formData.append('title', document.getElementById('curso-titulo').value);
+    formData.append('description', document.getElementById('curso-descricao').value);
     fetch('/api/courses', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(data)
-    }).then(r => r.json()).then(d => {
+        body: formData
+    }).then(r => {
+        if(r.redirected) {
+            window.location.href = r.url;
+        } else {
+            loadCourses();
+        }
         document.getElementById('modal-novo-curso').classList.add('hidden');
         document.getElementById('form-novo-curso').reset();
+    }).catch(() => {
         loadCourses();
     });
 }
