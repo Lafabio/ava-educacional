@@ -72,7 +72,7 @@ fetch('/api/courses').then(r=>r.json()).then(d => {
                 </div>
                 <div class='flex gap-2'>
                     <a href='/course/${c.id}' class='flex-1 text-center bg-blue-100 text-blue-600 py-2 rounded hover:bg-blue-200'>Ver Detalhes</a>
-                    <button onclick="excluirCurso('${c.id}', '${c.title}')" class='px-3 py-2 bg-red-100 text-red-600 rounded hover:bg-red-200'>Excluir</button>
+                    <button onclick="excluirCurso('${c.id}', '${c.title}')" class='px-3 py-2 bg-red-100 text-red-600 rounded hover:bg-red-200'><i class='fas fa-trash'></i></button>
                 </div>
             </div>
         `).join('');
