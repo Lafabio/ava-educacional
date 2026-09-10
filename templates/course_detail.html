@@ -8,7 +8,7 @@
         <p class='text-gray-600 mb-4'>{{ course.description or 'Sem descrição' }}</p>
         <div class='flex gap-4 text-sm text-gray-500'>
             <span>Professor: {{ course.profiles.full_name if course.profiles else 'N/A' }}</span>
-            <span>Criado em: {{ course.created_at.strftime('%d/%m/%Y') if course.created_at else 'N/A' }}</span>
+            <span>Criado em: {{ course.created_at[:10] if course.created_at else 'N/A' }}</span>
         </div>
     </div>
 
