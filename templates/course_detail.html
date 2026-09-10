@@ -4,11 +4,16 @@
 <div class='max-w-4xl mx-auto'>
     <a href='/courses' class='text-blue-600 mb-4 inline-block'>&larr; Voltar para Cursos</a>
     <div class='bg-white p-6 rounded-lg shadow-lg mb-6'>
-        <h1 class='text-3xl font-bold mb-2'>{{ course.title }}</h1>
-        <p class='text-gray-600 mb-4'>{{ course.description or 'Sem descrição' }}</p>
-        <div class='flex gap-4 text-sm text-gray-500'>
-            <span>Professor: {{ course.profiles.full_name if course.profiles else 'N/A' }}</span>
-            <span>Criado em: {{ course.created_at[:10] if course.created_at else 'N/A' }}</span>
+        <div class='flex justify-between items-start'>
+            <div>
+                <h1 class='text-3xl font-bold mb-2'>{{ course.title }}</h1>
+                <p class='text-gray-600 mb-4'>{{ course.description or 'Sem descrição' }}</p>
+                <div class='flex gap-4 text-sm text-gray-500'>
+                    <span>Professor: {{ course.profiles.full_name if course.profiles else 'N/A' }}</span>
+                    <span>Criado em: {{ course.created_at[:10] if course.created_at else 'N/A' }}</span>
+                </div>
+            </div>
+            <button onclick="excluirCurso()" class='px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700'>Excluir Curso</button>
         </div>
     </div>
 
@@ -33,4 +38,13 @@
         {% endif %}
     </div>
 </div>
+<script>
+function excluirCurso() {
+    if(confirm('Deseja excluir este curso?')) {
+        fetch('/api/courses/{{ course.id }}', { method: 'DELETE' }).then(() => {
+            window.location.href = '/courses';
+        });
+    }
+}
+</script>
 {% endblock %}
