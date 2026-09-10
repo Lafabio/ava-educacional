@@ -6,35 +6,41 @@
         <h3 class='font-bold mb-4'>Navegação</h3>
         <ul>
             <li class='mb-2'><a href='/dashboard' class='text-blue-600'>Dashboard</a></li>
-            <li class='mb-2'><a href='#' class='text-blue-600'>Meus Cursos</a></li>
-            <li class='mb-2'><a href='#' class='text-blue-600'>Avaliações</a></li>
-            <li class='mb-2'><a href='#' class='text-blue-600'>Boletim</a></li>
+            <li class='mb-2'><a href='/api/courses' class='text-blue-600'>Meus Cursos</a></li>
+            <li class='mb-2'><a href='/api/assessments' class='text-blue-600'>Avaliações</a></li>
         </ul>
     </div>
     <div class='flex-1'>
-        <h2 class='text-2xl font-bold mb-4'>Dashboard</h2>
+        <h2 class='text-2xl font-bold mb-4'>Bem-vindo, {{ user_email }}!</h2>
         <div class='grid grid-cols-3 gap-4 mb-6'>
             <div class='bg-blue-100 p-4 rounded text-center'>
-                <p class='text-2xl font-bold'>5</p>
+                <p class='text-2xl font-bold' id='course-count'>-</p>
                 <p class='text-gray-600'>Cursos Ativos</p>
             </div>
             <div class='bg-green-100 p-4 rounded text-center'>
-                <p class='text-2xl font-bold'>32</p>
+                <p class='text-2xl font-bold' id='enrollment-count'>-</p>
                 <p class='text-gray-600'>Alunos Matriculados</p>
             </div>
             <div class='bg-yellow-100 p-4 rounded text-center'>
-                <p class='text-2xl font-bold'>12</p>
-                <p class='text-gray-600'>Avaliações Pendentes</p>
+                <p class='text-2xl font-bold' id='assessment-count'>-</p>
+                <p class='text-gray-600'>Avaliações</p>
             </div>
         </div>
         <div class='bg-white p-4 rounded-lg shadow'>
-            <h3 class='font-bold mb-2'>Últimas Atividades</h3>
-            <ul>
-                <li class='border-b py-2'>João finalizou a avaliação de Matemática</li>
-                <li class='border-b py-2'>Novo comunicado postado em Português</li>
-                <li class='py-2'>Maria enviou trabalho de Ciências</li>
-            </ul>
+            <h3 class='font-bold mb-2'>Seus Cursos</h3>
+            <div id='courses-list'>Carregando...</div>
         </div>
     </div>
 </div>
+<script>
+fetch('/api/courses').then(r=>r.json()).then(d=>{
+    document.getElementById('course-count').textContent = d.courses.length;
+    const list = document.getElementById('courses-list');
+    if(d.courses.length === 0) {
+        list.innerHTML = '<p class="text-gray-500">Nenhum curso encontrado</p>';
+    } else {
+        list.innerHTML = d.courses.map(c => '<div class="border-b py-2"><strong>' + (c.title||'Sem título') + '</strong></div>').join('');
+    }
+});
+</script>
 {% endblock %}

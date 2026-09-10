@@ -269,7 +269,8 @@ def register_page(request: Request):
 
 @app.get('/dashboard')
 def dashboard(request: Request):
-    return templates.TemplateResponse(request, 'dashboard.html')
+    user_email = request.cookies.get('user_email', 'Usuário')
+    return templates.TemplateResponse(request, 'dashboard.html', {'user_email': user_email})
 
 # ============================================================================
 # ROTAS API (REST)
@@ -294,14 +295,17 @@ async def auth_signup(email: str = Form(...), password: str = Form(...), full_na
         raise HTTPException(400, str(e))
 
 @app.post('/api/auth/login')
-async def auth_login(email: str = Form(...), password: str = Form(...)):
+async def auth_login(request: Request, email: str = Form(...), password: str = Form(...)):
     if not supabase:
         raise HTTPException(500, 'Supabase não configurado')
     try:
         session = supabase.auth.sign_in_with_password({'email': email, 'password': password})
-        return {'success': True, 'access_token': session.session.access_token, 'user': session.user}
+        response = RedirectResponse(url='/dashboard', status_code=302)
+        response.set_cookie('access_token', session.session.access_token, httponly=True)
+        response.set_cookie('user_email', email, httponly=True)
+        return response
     except Exception as e:
-        raise HTTPException(401, 'Credenciais inválidas')
+        return RedirectResponse(url='/login?error=1', status_code=302)
 
 # --- Cursos ---
 
