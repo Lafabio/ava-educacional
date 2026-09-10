@@ -7,7 +7,6 @@
         <ul>
             <li class='mb-2'><a href='/dashboard' class='text-blue-600'>Dashboard</a></li>
             <li class='mb-2'><a href='/courses' class='text-blue-600 font-bold'>Meus Cursos</a></li>
-            <li class='mb-2'><a href='/assessments' class='text-blue-600'>Avaliações</a></li>
         </ul>
     </div>
     <div class='flex-1'>
@@ -28,14 +27,14 @@
 <div id='modal-novo-curso' class='hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
     <div class='bg-white p-6 rounded-lg shadow-lg w-96'>
         <h3 class='text-xl font-bold mb-4'>Novo Curso</h3>
-        <form id='form-novo-curso'>
+        <form method='POST' action='/api/courses'>
             <div class='mb-4'>
                 <label class='block text-gray-700'>Título</label>
-                <input type='text' id='curso-titulo' class='w-full p-2 border rounded' required>
+                <input type='text' name='title' class='w-full p-2 border rounded' required>
             </div>
             <div class='mb-4'>
                 <label class='block text-gray-700'>Descrição</label>
-                <textarea id='curso-descricao' class='w-full p-2 border rounded' rows='3'></textarea>
+                <textarea name='description' class='w-full p-2 border rounded' rows='3'></textarea>
             </div>
             <div class='flex justify-end gap-2'>
                 <button type='button' onclick="document.getElementById('modal-novo-curso').classList.add('hidden')" class='px-4 py-2 border rounded'>Cancelar</button>
@@ -46,52 +45,27 @@
 </div>
 
 <script>
-function loadCourses() {
-    fetch('/api/courses').then(r=>r.json()).then(d => {
-        const container = document.getElementById('courses-container');
-        const empty = document.getElementById('empty-state');
-        if(d.courses.length === 0) {
-            container.classList.add('hidden');
-            empty.classList.remove('hidden');
-        } else {
-            empty.classList.add('hidden');
-            container.classList.remove('hidden');
-            container.innerHTML = d.courses.map(c => `
-                <div class='bg-white p-4 rounded-lg shadow hover:shadow-lg transition'>
-                    <h3 class='font-bold text-lg mb-2'>${c.title || 'Sem título'}</h3>
-                    <p class='text-gray-600 text-sm mb-4'>${c.description || 'Sem descrição'}</p>
-                    <div class='flex justify-between items-center text-sm text-gray-500'>
-                        <span>${c.profiles ? c.profiles.full_name : 'Professor'}</span>
-                        <span>${new Date(c.created_at).toLocaleDateString('pt-BR')}</span>
-                    </div>
-                    <a href='/course/${c.id}' class='block mt-4 text-center bg-blue-100 text-blue-600 py-2 rounded hover:bg-blue-200'>Ver Detalhes</a>
+fetch('/api/courses').then(r=>r.json()).then(d => {
+    const container = document.getElementById('courses-container');
+    const empty = document.getElementById('empty-state');
+    if(d.courses.length === 0) {
+        container.classList.add('hidden');
+        empty.classList.remove('hidden');
+    } else {
+        empty.classList.add('hidden');
+        container.classList.remove('hidden');
+        container.innerHTML = d.courses.map(c => `
+            <div class='bg-white p-4 rounded-lg shadow hover:shadow-lg transition'>
+                <h3 class='font-bold text-lg mb-2'>${c.title || 'Sem título'}</h3>
+                <p class='text-gray-600 text-sm mb-4'>${c.description || 'Sem descrição'}</p>
+                <div class='flex justify-between items-center text-sm text-gray-500'>
+                    <span>${c.profiles ? c.profiles.full_name : 'Professor'}</span>
+                    <span>${new Date(c.created_at).toLocaleDateString('pt-BR')}</span>
                 </div>
-            `).join('');
-        }
-    });
-}
-
-document.getElementById('form-novo-curso').onsubmit = function(e) {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append('title', document.getElementById('curso-titulo').value);
-    formData.append('description', document.getElementById('curso-descricao').value);
-    fetch('/api/courses', {
-        method: 'POST',
-        body: formData
-    }).then(r => {
-        if(r.redirected) {
-            window.location.href = r.url;
-        } else {
-            loadCourses();
-        }
-        document.getElementById('modal-novo-curso').classList.add('hidden');
-        document.getElementById('form-novo-curso').reset();
-    }).catch(() => {
-        loadCourses();
-    });
-}
-
-loadCourses();
+                <a href='/course/${c.id}' class='block mt-4 text-center bg-blue-100 text-blue-600 py-2 rounded hover:bg-blue-200'>Ver Detalhes</a>
+            </div>
+        `).join('');
+    }
+});
 </script>
 {% endblock %}
