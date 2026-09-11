@@ -1,0 +1,568 @@
+{% extends 'base.html' %}
+{% block title %}Genética: Do Núcleo à Proteína{% endblock %}
+{% block content %}
+<div class='max-w-4xl mx-auto'>
+    <div class='bg-gradient-to-r from-purple-600 to-blue-600 text-white p-8 rounded-lg mb-8'>
+        <h1 class='text-4xl font-bold mb-2'>🧬 Genética: Do Núcleo à Proteína</h1>
+        <p class='text-purple-100'>E-book Completo — Ensino Médio</p>
+        <p class='text-sm text-purple-200 mt-2'>AVA Python Studio • Versão 1.0</p>
+    </div>
+
+    <nav class='bg-white p-4 rounded-lg shadow mb-8'>
+        <h3 class='font-bold mb-3'>Sumário</h3>
+        <ol class='list-decimal list-inside text-blue-600 space-y-1'>
+            <li><a href='#intro' class='hover:underline'>Introdução à Genética</a></li>
+            <li><a href='#nucleo' class='hover:underline'>O Núcleo Celular</a></li>
+            <li><a href='#dna' class='hover:underline'>Estrutura do DNA</a></li>
+            <li><a href='#rna' class='hover:underline'>Estrutura do RNA</a></li>
+            <li><a href='#replicacao' class='hover:underline'>Replicação do DNA</a></li>
+            <li><a href='#transcricao' class='hover:underline'>Transcrição (DNA → RNA)</a></li>
+            <li><a href='#traducao' class='hover:underline'>Tradução (RNA → Proteína)</a></li>
+            <li><a href='#codigo' class='hover:underline'>O Código Genético</a></li>
+            <li><a href='#regulacao' class='hover:underline'>Regulação Gênica</a></li>
+            <li><a href='#mutacoes' class='hover:underline'>Mutações</a></li>
+            <li><a href='#resumo' class='hover:underline'>Resumo Geral</a></li>
+            <li><a href='#exercicios' class='hover:underline'>Exercícios</a></li>
+        </ol>
+    </nav>
+
+    <article class='prose prose-lg max-w-none'>
+
+        <section id='intro' class='bg-white p-6 rounded-lg shadow mb-8'>
+            <h2 class='text-2xl font-bold text-purple-700 mb-4'>1. Introdução à Genética</h2>
+            <p class='mb-4'><strong>Genética</strong> é o ramo da biologia que estuda a <strong>herança biológica</strong> — como as características são transmitidas dos pais para os filhos.</p>
+
+            <h3 class='text-xl font-bold mb-3'>Conceitos Fundamentais</h3>
+            <table class='w-full border-collapse border mb-4'>
+                <thead class='bg-purple-100'>
+                    <tr><th class='border p-2 text-left'>Conceito</th><th class='border p-2 text-left'>Definição</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class='border p-2 font-semibold'>Gene</td><td class='border p-2'>Segmento de DNA que codifica uma proteína</td></tr>
+                    <tr><td class='border p-2 font-semibold'>Alelo</td><td class='border p-2'>Formas diferentes de um gene</td></tr>
+                    <tr><td class='border p-2 font-semibold'>Genótipo</td><td class='border p-2'>Constituição genética de um indivíduo</td></tr>
+                    <tr><td class='border p-2 font-semibold'>Fenótipo</td><td class='border p-2'>Manifestação externa do genótipo</td></tr>
+                    <tr><td class='border p-2 font-semibold'>Cromossomo</td><td class='border p-2'>Estrutura de DNA associado a proteínas</td></tr>
+                </tbody>
+            </table>
+
+            <div class='bg-blue-50 border-l-4 border-blue-500 p-4 rounded'>
+                <p class='font-bold text-blue-700'>Princípio Central da Biologia Molecular</p>
+                <p>O DNA é transcrito em RNA, que é traduzido em proteína. As proteínas são responsáveis pelas características do organismo.</p>
+            </div>
+        </section>
+
+        <section id='nucleo' class='bg-white p-6 rounded-lg shadow mb-8'>
+            <h2 class='text-2xl font-bold text-purple-700 mb-4'>2. O Núcleo Celular</h2>
+            <p class='mb-4'>O núcleo é o <strong>centro de controle da célula</strong>. É onde o DNA está armazenado.</p>
+
+            <div class='bg-gray-100 p-4 rounded font-mono text-sm mb-4 text-center'>
+                <pre class='inline-block text-left'>
+┌─────────────────────────────────┐
+│         NÚCLEO CELULAR          │
+│  ┌───────────────────────────┐  │
+│  │      Cromatina/DNA        │  │
+│  │   (genes distribuídos)    │  │
+│  │      ┌─────────┐         │  │
+│  │      │ Nucléolo│         │  │
+│  │      └─────────┘         │  │
+│  └───────────────────────────┘  │
+│  Membrane nuclear (poros)       │
+└─────────────────────────────────┘
+                </pre>
+            </div>
+
+            <table class='w-full border-collapse border mb-4'>
+                <thead class='bg-purple-100'>
+                    <tr><th class='border p-2 text-left'>Estrutura</th><th class='border p-2 text-left'>Função</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class='border p-2 font-semibold'>Membrane nuclear</td><td class='border p-2'>Envolve e protege o DNA; possui poros para transporte</td></tr>
+                    <tr><td class='border p-2 font-semibold'>Cromatina</td><td class='border p-2'>DNA + proteínas (histonas); forma relaxada do DNA</td></tr>
+                    <tr><td class='border p-2 font-semibold'>Cromossomos</td><td class='border p-2'>DNA condensado (durante divisão celular)</td></tr>
+                    <tr><td class='border p-2 font-semibold'>Nucléolo</td><td class='border p-2'>Produz os ribossomos</td></tr>
+                </tbody>
+            </table>
+
+            <p><strong>Humanos:</strong> 46 cromossomos (23 pares) — 22 autossômicos + 1 par sexual (XX ou XY)</p>
+        </section>
+
+        <section id='dna' class='bg-white p-6 rounded-lg shadow mb-8'>
+            <h2 class='text-2xl font-bold text-purple-700 mb-4'>3. Estrutura do DNA</h2>
+            <p class='mb-4'><strong>DNA</strong> = Ácido Desoxirribonucleico — a molécula que armazena as <strong>informações genéticas</strong>.</p>
+
+            <h3 class='text-xl font-bold mb-3'>Dupla Hélice</h3>
+            <div class='bg-gray-100 p-4 rounded font-mono text-sm mb-4 text-center'>
+                <pre class='inline-block text-left'>
+    Fita 1                    Fita 2
+      │                         │
+  ────A═══════════════════════T────
+  ────T═══════════════════════A────
+  ────G═══════════════════════C────
+  ────C═══════════════════════G────
+      │                         │
+   backbone               backbone
+  (desoxirribose + fosfato)
+                </pre>
+            </div>
+
+            <h3 class='text-xl font-bold mb-3'>Nucleotídeos</h3>
+            <p class='mb-4'>Cada nucleotídeo é composto por:</p>
+            <ul class='list-disc list-inside mb-4 space-y-1'>
+                <li><strong>Fosfato</strong> (PO₄³⁻)</li>
+                <li><strong>Desoxirribose</strong> (açúcar)</li>
+                <li><strong>Base Nitrogenada</strong> (A, T, C ou G)</li>
+            </ul>
+
+            <h3 class='text-xl font-bold mb-3'>Bases Nitrogenadas</h3>
+            <table class='w-full border-collapse border mb-4'>
+                <thead class='bg-purple-100'>
+                    <tr><th class='border p-2 text-left'>Base</th><th class='border p-2 text-left'>Tipo</th><th class='border p-2 text-left'>Pareia com</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class='border p-2 font-semibold'>Adenina (A)</td><td class='border p-2'>Purina</td><td class='border p-2'>Timina (T)</td></tr>
+                    <tr><td class='border p-2 font-semibold'>Timina (T)</td><td class='border p-2'>Pirimidina</td><td class='border p-2'>Adenina (A)</td></tr>
+                    <tr><td class='border p-2 font-semibold'>Guanina (G)</td><td class='border p-2'>Purina</td><td class='border p-2'>Citosina (C)</td></tr>
+                    <tr><td class='border p-2 font-semibold'>Citosina (C)</td><td class='border p-2'>Pirimidina</td><td class='border p-2'>Guanina (G)</td></tr>
+                </tbody>
+            </table>
+
+            <div class='bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded'>
+                <p class='font-bold text-yellow-700'>Regra de Chargaff</p>
+                <p>A = T e G = C (bases complementares)</p>
+            </div>
+        </section>
+
+        <section id='rna' class='bg-white p-6 rounded-lg shadow mb-8'>
+            <h2 class='text-2xl font-bold text-purple-700 mb-4'>4. Estrutura do RNA</h2>
+            <p class='mb-4'><strong>RNA</strong> = Ácido Ribonucleico — transporta a informação do DNA para os ribossomos.</p>
+
+            <h3 class='text-xl font-bold mb-3'>DNA vs RNA</h3>
+            <table class='w-full border-collapse border mb-4'>
+                <thead class='bg-purple-100'>
+                    <tr><th class='border p-2 text-left'>Característica</th><th class='border p-2 text-left'>DNA</th><th class='border p-2 text-left'>RNA</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class='border p-2'>Açúcar</td><td class='border p-2'>Desoxirribose</td><td class='border p-2'>Ribose</td></tr>
+                    <tr><td class='border p-2'>Bases</td><td class='border p-2'>A, T, G, C</td><td class='border p-2'>A, U, G, C</td></tr>
+                    <tr><td class='border p-2'>Fitas</td><td class='border p-2'>2 (dupla hélice)</td><td class='border p-2'>1 (única fita)</td></tr>
+                    <tr><td class='border p-2'>Localização</td><td class='border p-2'>Núcleo</td><td class='border p-2'>Núcleo + Citoplasma</td></tr>
+                    <tr><td class='border p-2'>Função</td><td class='border p-2'>Armazenar info</td><td class='border p-2'>Transportar info</td></tr>
+                </tbody>
+            </table>
+
+            <h3 class='text-xl font-bold mb-3'>Tipos de RNA</h3>
+            <div class='grid grid-cols-1 md:grid-cols-3 gap-4 mb-4'>
+                <div class='bg-blue-50 p-4 rounded-lg'>
+                    <p class='font-bold text-blue-700'>mRNA</p>
+                    <p class='text-sm'>RNA Mensageiro — transporta a informação do DNA para o ribossomo</p>
+                </div>
+                <div class='bg-green-50 p-4 rounded-lg'>
+                    <p class='font-bold text-green-700'>tRNA</p>
+                    <p class='text-sm'>RNA Transportador — transporta aminoácidos para o ribossomo</p>
+                </div>
+                <div class='bg-red-50 p-4 rounded-lg'>
+                    <p class='font-bold text-red-700'>rRNA</p>
+                    <p class='text-sm'>RNA Ribossomal — componente dos ribossomos</p>
+                </div>
+            </div>
+
+            <div class='bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded'>
+                <p class='font-bold text-yellow-700'>Diferença chave</p>
+                <p>No RNA, a <strong>Uracila (U)</strong> substitui a Timina (T).</p>
+            </div>
+        </section>
+
+        <section id='replicacao' class='bg-white p-6 rounded-lg shadow mb-8'>
+            <h2 class='text-2xl font-bold text-purple-700 mb-4'>5. Replicação do DNA</h2>
+            <p class='mb-4'>Processo pelo qual o DNA faz uma <strong>cópia idêntica</strong> de si mesmo. Ocorre antes da divisão celular.</p>
+
+            <div class='bg-gray-100 p-4 rounded font-mono text-sm mb-4 text-center'>
+                <pre class='inline-block text-left'>
+1. DESEMPACOTAMENTO
+   Helicase quebra pontes de H
+
+   ════════════════════     →     ═══╗     ╔═══
+   ════════════════════             ═══╝     ╚═══
+
+2. SÍNTESE
+   DNA Polimerase adiciona nucleotídeos
+
+   ═══╗     ╔═══             ═══╗═════╔═══
+      ║     ║                    ║     ║
+   ═══╝═════╚═══             ═══╝═════╚═══
+
+3. DUPLA HÉLICE (2 moléculas idênticas)
+                </pre>
+            </div>
+
+            <h3 class='text-xl font-bold mb-3'>Enzimas Envolvidas</h3>
+            <table class='w-full border-collapse border mb-4'>
+                <thead class='bg-purple-100'>
+                    <tr><th class='border p-2 text-left'>Enzima</th><th class='border p-2 text-left'>Função</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class='border p-2 font-semibold'>Helicase</td><td class='border p-2'>Desfaz a dupla hélice</td></tr>
+                    <tr><td class='border p-2 font-semibold'>Topoisomerase</td><td class='border p-2'>Alivia a tensão da hélice</td></tr>
+                    <tr><td class='border p-2 font-semibold'>Primase</td><td class='border p-2'>Cria um primer de RNA</td></tr>
+                    <tr><td class='border p-2 font-semibold'>DNA Polimerase</td><td class='border p-2'>Adiciona nucleotídeos complementares</td></tr>
+                    <tr><td class='border p-2 font-semibold'>Ligase</td><td class='border p-2'>Liga os fragmentos de Okazaki</td></tr>
+                </tbody>
+            </table>
+
+            <div class='bg-blue-50 border-l-4 border-blue-500 p-4 rounded'>
+                <p class='font-bold text-blue-700'>Características</p>
+                <p><strong>Semiconservativa:</strong> cada molécula nova tem uma fita original + uma nova</p>
+                <p><strong>Bidirecional:</strong> começa em um ponto e vai nas duas direções</p>
+                <p><strong>Sempre 5' → 3':</strong> a síntese só ocorre neste sentido</p>
+            </div>
+        </section>
+
+        <section id='transcricao' class='bg-white p-6 rounded-lg shadow mb-8'>
+            <h2 class='text-2xl font-bold text-purple-700 mb-4'>6. Transcrição (DNA → RNA)</h2>
+            <p class='mb-4'>Processo em que a informação de um gene do DNA é <strong>copiada</strong> para um RNA mensageiro.</p>
+
+            <div class='bg-blue-50 border-l-4 border-blue-500 p-4 rounded mb-4'>
+                <p class='font-bold text-blue-700'>Localização: Núcleo celular</p>
+            </div>
+
+            <div class='bg-gray-100 p-4 rounded font-mono text-sm mb-4 text-center'>
+                <pre class='inline-block text-left'>
+DNA (fita molde):  3'─TAC─GCA─AAT─CGG─5'
+                          ↓   ↓   ↓   ↓
+mRNA formado:      5'─AUG─CGU─UUA─GCC─3'
+                </pre>
+            </div>
+
+            <h3 class='text-xl font-bold mb-3'>Passos da Transcrição</h3>
+            <div class='space-y-4 mb-4'>
+                <div class='flex gap-4'>
+                    <span class='bg-purple-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold'>1</span>
+                    <div>
+                        <p class='font-bold'>Iniciação</p>
+                        <p class='text-gray-600'>A RNA Polimerase se liga ao <strong>promotor</strong> e a dupla hélice se abre.</p>
+                    </div>
+                </div>
+                <div class='flex gap-4'>
+                    <span class='bg-purple-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold'>2</span>
+                    <div>
+                        <p class='font-bold'>Elongação</p>
+                        <p class='text-gray-600'>A RNA Polimerase percorre a fita (3'→5') montando o mRNA (5'→3').</p>
+                        <p class='text-sm text-gray-500'>DNA A → RNA U | DNA T → RNA A | DNA G → RNA C | DNA C → RNA G</p>
+                    </div>
+                </div>
+                <div class='flex gap-4'>
+                    <span class='bg-purple-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold'>3</span>
+                    <div>
+                        <p class='font-bold'>Terminação</p>
+                        <p class='text-gray-600'>A RNA Polimerase encontra um sinal de terminação e o mRNA é liberado.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class='text-xl font-bold mb-3'>Processamento do mRNA</h3>
+            <div class='bg-gray-100 p-4 rounded font-mono text-sm mb-4 text-center'>
+                <pre class='inline-block text-left'>
+Pré-mRNA:  5'─exon─intron─exon─intron─exon─3'
+                    ↓ Splicing
+mRNA:      5'─exon──────exon──────exon─3'
+                </pre>
+            </div>
+            <p><strong>Íntrons</strong> são removidos, <strong>exons</strong> ficam no mRNA final.</p>
+        </section>
+
+        <section id='traducao' class='bg-white p-6 rounded-lg shadow mb-8'>
+            <h2 class='text-2xl font-bold text-purple-700 mb-4'>7. Tradução (RNA → Proteína)</h2>
+            <p class='mb-4'>Processo em que o mRNA é <strong>interpretado</strong> pelos ribossomos para produzir uma <strong>proteína</strong>.</p>
+
+            <div class='bg-green-50 border-l-4 border-green-500 p-4 rounded mb-4'>
+                <p class='font-bold text-green-700'>Localização: Ribossomos (citoplasma)</p>
+            </div>
+
+            <h3 class='text-xl font-bold mb-3'>Componentes da Tradução</h3>
+            <table class='w-full border-collapse border mb-4'>
+                <thead class='bg-purple-100'>
+                    <tr><th class='border p-2 text-left'>Componente</th><th class='border p-2 text-left'>Função</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class='border p-2 font-semibold'>mRNA</td><td class='border p-2'>Fornece a mensagem (códons)</td></tr>
+                    <tr><td class='border p-2 font-semibold'>tRNA</td><td class='border p-2'>Transporta aminoácidos</td></tr>
+                    <tr><td class='border p-2 font-semibold'>Ribossomo</td><td class='border p-2'>Máquina de síntese proteica</td></tr>
+                    <tr><td class='border p-2 font-semibold'>Aminoácidos</td><td class='border p-2'>Blocos de construção das proteínas</td></tr>
+                </tbody>
+            </table>
+
+            <h3 class='text-xl font-bold mb-3'>Ribossomo</h3>
+            <div class='bg-gray-100 p-4 rounded font-mono text-sm mb-4 text-center'>
+                <pre class='inline-block text-left'>
+     ┌───────────────────┐
+     │   Subunidade      │
+     │   Grande (60S)    │
+     │  ┌─────────────┐  │
+     │  │  Sítio P    │  │  ← Peptidil-tRNA
+     │  ├─────────────┤  │
+     │  │  Sítio A    │  │  ← Aminoacil-tRNA
+     │  ├─────────────┤  │
+     │  │  Sítio E    │  │  ← Saída
+     │  └─────────────┘  │
+     │   Subunidade      │
+     │   Pequena (40S)   │
+     └───────────────────┘
+                </pre>
+            </div>
+
+            <h3 class='text-xl font-bold mb-3'>Passos da Tradução</h3>
+            <div class='space-y-4 mb-4'>
+                <div class='flex gap-4'>
+                    <span class='bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold'>1</span>
+                    <div>
+                        <p class='font-bold'>Iniciação</p>
+                        <p class='text-gray-600'>O tRNA iniciador (Met) se liga ao <strong>códon AUG</strong>.</p>
+                    </div>
+                </div>
+                <div class='flex gap-4'>
+                    <span class='bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold'>2</span>
+                    <div>
+                        <p class='font-bold'>Elongação</p>
+                        <p class='text-gray-600'>Cada códon é lido, o tRNA complementar se liga, aminoácido é adicionado.</p>
+                    </div>
+                </div>
+                <div class='flex gap-4'>
+                    <span class='bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold'>3</span>
+                    <div>
+                        <p class='font-bold'>Terminação</p>
+                        <p class='text-gray-600'>O ribossomo encontra um <strong>código de parada</strong> (UAA, UAG ou UGA).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class='bg-gray-100 p-4 rounded font-mono text-sm text-center'>
+                <pre class='inline-block text-left'>
+mRNA:  5'─AUG─GCU─UAC─AAA─UGA─3'
+          │    │    │    │    │
+         Met  Ala  Tyr  Lys  STOP
+          │    │    │    │
+          └────┴────┴────┘
+              PROTEÍNA
+                </pre>
+            </div>
+        </section>
+
+        <section id='codigo' class='bg-white p-6 rounded-lg shadow mb-8'>
+            <h2 class='text-2xl font-bold text-purple-700 mb-4'>8. O Código Genético</h2>
+            <p class='mb-4'><strong>Códon</strong> = grupo de 3 nucleotídeos do mRNA. Existem <strong>64 códons</strong> possíveis.</p>
+
+            <h3 class='text-xl font-bold mb-3'>Propriedades do Código</h3>
+            <div class='grid grid-cols-2 gap-4 mb-4'>
+                <div class='bg-purple-50 p-3 rounded'>
+                    <p class='font-bold text-purple-700'>Degenerado</p>
+                    <p class='text-sm'>Vários códons → mesmo aminoácido</p>
+                </div>
+                <div class='bg-purple-50 p-3 rounded'>
+                    <p class='font-bold text-purple-700'>Universal</p>
+                    <p class='text-sm'>Mesmo código em quase todos os seres vivos</p>
+                </div>
+                <div class='bg-purple-50 p-3 rounded'>
+                    <p class='font-bold text-purple-700'>Não sobreposto</p>
+                    <p class='text-sm'>Cada nucleotídio pertence a um só códon</p>
+                </div>
+                <div class='bg-purple-50 p-3 rounded'>
+                    <p class='font-bold text-purple-700'>Unívoco</p>
+                    <p class='text-sm'>Cada códon → apenas um aminoácido</p>
+                </div>
+            </div>
+
+            <h3 class='text-xl font-bold mb-3'>Tabela do Código Genético</h3>
+            <div class='overflow-x-auto'>
+                <table class='w-full border-collapse border text-sm'>
+                    <thead class='bg-purple-100'>
+                        <tr><th class='border p-2'>Códon</th><th class='border p-2'>AA</th><th class='border p-2'>Códon</th><th class='border p-2'>AA</th><th class='border p-2'>Códon</th><th class='border p-2'>AA</th><th class='border p-2'>Códon</th><th class='border p-2'>AA</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class='border p-1 font-mono bg-yellow-100'>AUG</td><td class='border p-1'>Met★</td><td class='border p-1 font-mono'>UUU</td><td class='border p-1'>Phe</td><td class='border p-1 font-mono'>UCU</td><td class='border p-1'>Ser</td><td class='border p-1 font-mono'>UAU</td><td class='border p-1'>Tyr</td></tr>
+                        <tr><td class='border p-1 font-mono bg-yellow-100'>UAA</td><td class='border p-1 bg-red-100'>STOP</td><td class='border p-1 font-mono'>UUC</td><td class='border p-1'>Phe</td><td class='border p-1 font-mono'>UCC</td><td class='border p-1'>Ser</td><td class='border p-1 font-mono'>UAC</td><td class='border p-1'>Tyr</td></tr>
+                        <tr><td class='border p-1 font-mono bg-yellow-100'>UAG</td><td class='border p-1 bg-red-100'>STOP</td><td class='border p-1 font-mono'>UUA</td><td class='border p-1'>Leu</td><td class='border p-1 font-mono'>UCA</td><td class='border p-1'>Ser</td><td class='border p-1 font-mono'>UGU</td><td class='border p-1'>Cys</td></tr>
+                        <tr><td class='border p-1 font-mono bg-yellow-100'>UGA</td><td class='border p-1 bg-red-100'>STOP</td><td class='border p-1 font-mono'>UUG</td><td class='border p-1'>Leu</td><td class='border p-1 font-mono'>UCG</td><td class='border p-1'>Ser</td><td class='border p-1 font-mono'>UGC</td><td class='border p-1'>Cys</td></tr>
+                        <tr><td class='border p-1 font-mono'>GCU</td><td class='border p-1'>Ala</td><td class='border p-1 font-mono'>CCU</td><td class='border p-1'>Pro</td><td class='border p-1 font-mono'>ACU</td><td class='border p-1'>Thr</td><td class='border p-1 font-mono'>GGU</td><td class='border p-1'>Gly</td></tr>
+                        <tr><td class='border p-1 font-mono'>GCC</td><td class='border p-1'>Ala</td><td class='border p-1 font-mono'>CCC</td><td class='border p-1'>Pro</td><td class='border p-1 font-mono'>ACC</td><td class='border p-1'>Thr</td><td class='border p-1 font-mono'>GGC</td><td class='border p-1'>Gly</td></tr>
+                        <tr><td class='border p-1 font-mono'>GCA</td><td class='border p-1'>Ala</td><td class='border p-1 font-mono'>CCA</td><td class='border p-1'>Pro</td><td class='border p-1 font-mono'>ACA</td><td class='border p-1'>Thr</td><td class='border p-1 font-mono'>GGA</td><td class='border p-1'>Gly</td></tr>
+                        <tr><td class='border p-1 font-mono'>GCG</td><td class='border p-1'>Ala</td><td class='border p-1 font-mono'>CCG</td><td class='border p-1'>Pro</td><td class='border p-1 font-mono'>ACG</td><td class='border p-1'>Thr</td><td class='border p-1 font-mono'>GGG</td><td class='border p-1'>Gly</td></tr>
+                        <tr><td class='border p-1 font-mono'>GUU</td><td class='border p-1'>Val</td><td class='border p-1 font-mono'>CAU</td><td class='border p-1'>His</td><td class='border p-1 font-mono'>AAU</td><td class='border p-1'>Asn</td><td class='border p-1 font-mono'>AGU</td><td class='border p-1'>Ser</td></tr>
+                        <tr><td class='border p-1 font-mono'>GUC</td><td class='border p-1'>Val</td><td class='border p-1 font-mono'>CAC</td><td class='border p-1'>His</td><td class='border p-1 font-mono'>AAC</td><td class='border p-1'>Asn</td><td class='border p-1 font-mono'>AGC</td><td class='border p-1'>Ser</td></tr>
+                        <tr><td class='border p-1 font-mono'>GUA</td><td class='border p-1'>Val</td><td class='border p-1 font-mono'>CAA</td><td class='border p-1'>Gln</td><td class='border p-1 font-mono'>AAA</td><td class='border p-1'>Lys</td><td class='border p-1 font-mono'>AGA</td><td class='border p-1'>Arg</td></tr>
+                        <tr><td class='border p-1 font-mono'>GUG</td><td class='border p-1'>Val</td><td class='border p-1 font-mono'>CAG</td><td class='border p-1'>Gln</td><td class='border p-1 font-mono'>AAG</td><td class='border p-1'>Lys</td><td class='border p-1 font-mono'>AGG</td><td class='border p-1'>Arg</td></tr>
+                        <tr><td class='border p-1 font-mono'>AUU</td><td class='border p-1'>Ile</td><td class='border p-1 font-mono'>CGU</td><td class='border p-1'>Arg</td><td class='border p-1 font-mono'>GAU</td><td class='border p-1'>Asp</td><td class='border p-1 font-mono'>UGG</td><td class='border p-1'>Trp</td></tr>
+                        <tr><td class='border p-1 font-mono'>AUC</td><td class='border p-1'>Ile</td><td class='border p-1 font-mono'>CGC</td><td class='border p-1'>Arg</td><td class='border p-1 font-mono'>GAC</td><td class='border p-1'>Asp</td><td class='border p-1 font-mono'></td><td class='border p-1'></td></tr>
+                        <tr><td class='border p-1 font-mono'>AUA</td><td class='border p-1'>Ile</td><td class='border p-1 font-mono'>CGA</td><td class='border p-1'>Arg</td><td class='border p-1 font-mono'>GAA</td><td class='border p-1'>Glu</td><td class='border p-1 font-mono'></td><td class='border p-1'></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class='text-sm text-gray-500 mt-2'>★ = Início (Metionina) | AA = Aminoácido</p>
+        </section>
+
+        <section id='regulacao' class='bg-white p-6 rounded-lg shadow mb-8'>
+            <h2 class='text-2xl font-bold text-purple-700 mb-4'>9. Regulação Gênica</h2>
+            <p class='mb-4'>Nem todos os genes precisam estar ativos o tempo todo. Células diferentes expressam genes diferentes.</p>
+
+            <h3 class='text-xl font-bold mb-3'>Níveis de Regulação</h3>
+            <div class='space-y-3 mb-4'>
+                <div class='flex items-start gap-3 bg-purple-50 p-3 rounded'>
+                    <span class='bg-purple-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold'>1</span>
+                    <div>
+                        <p class='font-bold'>Transcriacional (mais importante)</p>
+                        <p class='text-sm text-gray-600'>DNA → mRNA (ativador/repressor)</p>
+                    </div>
+                </div>
+                <div class='flex items-start gap-3 bg-purple-50 p-3 rounded'>
+                    <span class='bg-purple-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold'>2</span>
+                    <div>
+                        <p class='font-bold'>Pós-transcricional</p>
+                        <p class='text-sm text-gray-600'>Processamento do mRNA (splicing alternativo)</p>
+                    </div>
+                </div>
+                <div class='flex items-start gap-3 bg-purple-50 p-3 rounded'>
+                    <span class='bg-purple-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold'>3</span>
+                    <div>
+                        <p class='font-bold'>Traducional</p>
+                        <p class='text-sm text-gray-600'>mRNA → proteína (acesso ao ribossomo)</p>
+                    </div>
+                </div>
+                <div class='flex items-start gap-3 bg-purple-50 p-3 rounded'>
+                    <span class='bg-purple-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold'>4</span>
+                    <div>
+                        <p class='font-bold'>Pós-traducional</p>
+                        <p class='text-sm text-gray-600'>Modificação da proteína (fosforilação, clivagem)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id='mutacoes' class='bg-white p-6 rounded-lg shadow mb-8'>
+            <h2 class='text-2xl font-bold text-purple-700 mb-4'>10. Mutações</h2>
+            <p class='mb-4'><strong>Mutação</strong> = alteração na sequência de nucleotídeos do DNA.</p>
+
+            <h3 class='text-xl font-bold mb-3'>Mutações Gênicas (Pontuais)</h3>
+            <table class='w-full border-collapse border mb-4'>
+                <thead class='bg-purple-100'>
+                    <tr><th class='border p-2 text-left'>Tipo</th><th class='border p-2 text-left'>Exemplo</th><th class='border p-2 text-left'>Consequência</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class='border p-2'>Substituição</td><td class='border p-2'>AAA → AAG</td><td class='border p-2'>Pode não alterar o aminoácido</td></tr>
+                    <tr><td class='border p-2'>Inserção</td><td class='border p-2'>+1 nucleotídeo</td><td class='border p-2'>Frameshift (muda tudo)</td></tr>
+                    <tr><td class='border p-2'>Deleção</td><td class='border p-2'>-1 nucleotídeo</td><td class='border p-2'>Frameshift (muda tudo)</td></tr>
+                </tbody>
+            </table>
+
+            <h3 class='text-xl font-bold mb-3'>Exemplo de Frameshift</h3>
+            <div class='bg-gray-100 p-4 rounded font-mono text-sm mb-4'>
+                <p>Normal: &nbsp;&nbsp;&nbsp; AUG GCU UAC AAA UGA</p>
+                <p class='text-green-600'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Met Ala Tyr Lys STOP</p>
+                <p class='mt-2'>Inserção: AUG GCG CUU ACA AAU GA</p>
+                <p class='text-red-600'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Met Ala Leu Thr Asn ...</p>
+            </div>
+
+            <h3 class='text-xl font-bold mb-3'>Causas</h3>
+            <div class='grid grid-cols-2 gap-4'>
+                <div class='bg-orange-50 p-3 rounded'>
+                    <p class='font-bold text-orange-700'>Espontâneas</p>
+                    <p class='text-sm'>Erros na replicação</p>
+                </div>
+                <div class='bg-orange-50 p-3 rounded'>
+                    <p class='font-bold text-orange-700'>Físicas</p>
+                    <p class='text-sm'>Radiação UV, raios X</p>
+                </div>
+                <div class='bg-orange-50 p-3 rounded'>
+                    <p class='font-bold text-orange-700'>Químicas</p>
+                    <p class='text-sm'>Substâncias mutagênicas</p>
+                </div>
+                <div class='bg-orange-50 p-3 rounded'>
+                    <p class='font-bold text-orange-700'>Biológicas</p>
+                    <p class='text-sm'>Vírus</p>
+                </div>
+            </div>
+        </section>
+
+        <section id='resumo' class='bg-white p-6 rounded-lg shadow mb-8'>
+            <h2 class='text-2xl font-bold text-purple-700 mb-4'>11. Resumo Geral</h2>
+
+            <div class='bg-gradient-to-r from-purple-100 to-blue-100 p-6 rounded-lg text-center mb-6'>
+                <p class='text-xl font-bold mb-2'>Fluxo Central da Biologia Molecular</p>
+                <p class='text-3xl font-mono font-bold text-purple-700'>
+                    DNA <span class='text-gray-400'>→</span> mRNA <span class='text-gray-400'>→</span> Proteína
+                </p>
+                <p class='text-sm text-gray-600 mt-2'>Transcrição (Núcleo) → Tradução (Ribossomo)</p>
+            </div>
+
+            <h3 class='text-xl font-bold mb-3'>DNA vs RNA</h3>
+            <table class='w-full border-collapse border mb-4'>
+                <thead class='bg-purple-100'>
+                    <tr><th class='border p-2 text-left'>Característica</th><th class='border p-2 text-left'>DNA</th><th class='border p-2 text-left'>RNA</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class='border p-2'>Açúcar</td><td class='border p-2'>Desoxirribose</td><td class='border p-2'>Ribose</td></tr>
+                    <tr><td class='border p-2'>Bases</td><td class='border p-2'>A, T, G, C</td><td class='border p-2'>A, U, G, C</td></tr>
+                    <tr><td class='border p-2'>Fitas</td><td class='border p-2'>2</td><td class='border p-2'>1</td></tr>
+                    <tr><td class='border p-2'>Localização</td><td class='border p-2'>Núcleo</td><td class='border p-2'>Núcleo + Citoplasma</td></tr>
+                    <tr><td class='border p-2'>Função</td><td class='border p-2'>Armazenar</td><td class='border p-2'>Transportar</td></tr>
+                </tbody>
+            </table>
+
+            <h3 class='text-xl font-bold mb-3'>Etapa do Processo</h3>
+            <table class='w-full border-collapse border'>
+                <thead class='bg-purple-100'>
+                    <tr><th class='border p-2 text-left'>Etapa</th><th class='border p-2 text-left'>O que acontece</th><th class='border p-2 text-left'>Onde</th><th class='border p-2 text-left'>Enzima</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class='border p-2 font-semibold'>Replicação</td><td class='border p-2'>DNA → DNA</td><td class='border p-2'>Núcleo</td><td class='border p-2'>DNA Polimerase</td></tr>
+                    <tr><td class='border p-2 font-semibold'>Transcrição</td><td class='border p-2'>DNA → mRNA</td><td class='border p-2'>Núcleo</td><td class='border p-2'>RNA Polimerase</td></tr>
+                    <tr><td class='border p-2 font-semibold'>Tradução</td><td class='border p-2'>mRNA → Proteína</td><td class='border p-2'>Ribossomo</td><td class='border p-2'>Ribossomo</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id='exercicios' class='bg-white p-6 rounded-lg shadow mb-8'>
+            <h2 class='text-2xl font-bold text-purple-700 mb-4'>12. Exercícios</h2>
+
+            <div class='space-y-6'>
+                <div class='border-l-4 border-blue-500 pl-4'>
+                    <p class='font-bold'>Exercício 1: Complementaridade</p>
+                    <p>Se a fita molde do DNA é: <code class='bg-gray-100 px-1'>3'─TAC GCA AAT CGG 5'</code></p>
+                    <p>a) Qual é a sequência do mRNA transcrito?</p>
+                    <p>b) Quais aminoácidos são codificados?</p>
+                </div>
+
+                <div class='border-l-4 border-blue-500 pl-4'>
+                    <p class='font-bold'>Exercício 2: Tabela do Código Genético</p>
+                    <p>Determine os aminoácidos para:</p>
+                    <p>a) <code class='bg-gray-100 px-1'>5'─AUG UUU GAA 3'</code></p>
+                    <p>b) <code class='bg-gray-100 px-1'>5'─UAC AAA GGU 3'</code></p>
+                </div>
+
+                <div class='border-l-4 border-blue-500 pl-4'>
+                    <p class='font-bold'>Exercício 3: Mutação</p>
+                    <p>Sequência normal: <code class='bg-gray-100 px-1'>5'─AUG GCU UAC AAA UGA 3'</code></p>
+                    <p>Após mutação (4º nucleotídeo G→A): <code class='bg-gray-100 px-1'>5'─AUG ACU UAC AAA UGA 3'</code></p>
+                    <p>a) Quantos aminoácidos diferentes resultado?</p>
+                </div>
+
+                <div class='border-l-4 border-blue-500 pl-4'>
+                    <p class='font-bold'>Exercício 4: Verdadeiro ou Falso</p>
+                    <ol class='list-decimal list-inside space-y-1 text-sm'>
+                        <li>( ) O RNA possui a base Timina.</li>
+                        <li>( ) A tradução ocorre no núcleo.</li>
+                        <li>( ) O códon AUG codifica metionina.</li>
+                        <li>( ) A DNA Polimerase sintetiza RNA.</li>
+                        <li>( ) Íntrons são removidos durante o splicing.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+    </article>
+
+    <div class='bg-gray-100 p-6 rounded-lg text-center mt-8'>
+        <p class='text-gray-600'>E-book: Genética — Do Núcleo à Proteína</p>
+        <p class='text-sm text-gray-500'>Versão 1.0 • AVA Python Studio • Licença MIT</p>
+    </div>
+</div>
+{% endblock %}

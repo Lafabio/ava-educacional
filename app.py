@@ -275,6 +275,10 @@ def forgot_password_page(request: Request):
 def courses_page(request: Request):
     return templates.TemplateResponse(request, 'courses.html')
 
+@app.get('/ebook/genetica')
+def ebook_genetica(request: Request):
+    return templates.TemplateResponse(request, 'ebook_genetica.html')
+
 @app.get('/catalog')
 def catalog_page(request: Request):
     return templates.TemplateResponse(request, 'catalog.html')
