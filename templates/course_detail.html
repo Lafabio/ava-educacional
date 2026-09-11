@@ -2,7 +2,7 @@
 {% block title %}{{ course.title }}{% endblock %}
 {% block content %}
 <div class='max-w-4xl mx-auto'>
-    <a href='/courses' class='text-blue-600 mb-4 inline-block'>&larr; Voltar para Cursos</a>
+    <a href='/my-courses' class='text-blue-600 mb-4 inline-block'>&larr; Voltar para Minhas Matrículas</a>
     <div class='bg-white p-6 rounded-lg shadow-lg mb-6'>
         <div class='flex justify-between items-start'>
             <div>
@@ -19,7 +19,7 @@
 
     <div class='bg-white p-6 rounded-lg shadow-lg mb-6'>
         <div class='flex justify-between items-center mb-4'>
-            <h2 class='text-xl font-bold'>Conteúdos</h2>
+            <h2 class='text-xl font-bold'>Conteúdos do Curso</h2>
             <button onclick="abrirModalAdicionar()" class='bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700'><i class='fas fa-plus mr-1'></i> Adicionar</button>
         </div>
         {% if contents %}
@@ -45,7 +45,7 @@
                     </div>
                     <div class='flex gap-1'>
                         {% if content.content_url %}
-                            <a href='{{ content.content_url }}' target='_blank' class='text-blue-600 px-2 py-1 rounded hover:bg-blue-100' title='Abrir'><i class='fas fa-external-link-alt'></i></a>
+                            <a href='{{ content.content_url }}' class='bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 text-sm font-semibold' title='Acessar'><i class='fas fa-external-link-alt mr-1'></i> Acessar</a>
                         {% endif %}
                         <button onclick="abrirModalEditar('{{ content.id }}', '{{ content.title }}', '{{ content.type }}')" class='text-yellow-600 px-2 py-1 rounded hover:bg-yellow-100' title='Editar'><i class='fas fa-edit'></i></button>
                         <button onclick="excluirConteudo('{{ content.id }}', '{{ content.title }}')" class='text-red-600 px-2 py-1 rounded hover:bg-red-100' title='Excluir'><i class='fas fa-trash'></i></button>
